@@ -3,6 +3,7 @@ package nextstep.context;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nextstep.context.test_case_1.TC1_Layer_1_1;
 import nextstep.context.test_case_1.TC1_Layer_1_2;
 import nextstep.context.test_case_1.TC1_Layer_1_3;
@@ -18,6 +19,8 @@ import nextstep.context.test_case_3.TC3_Layer_2_1;
 import nextstep.context.test_case_3.TC3_Layer_2_2;
 import nextstep.context.test_case_3.TC3_Layer_3_1;
 import nextstep.context.test_case_3.TC3_Layer_3_2;
+import nextstep.context.test_case_3.TC3_Layer_3_3;
+import nextstep.context.test_case_3.TC3_Layer_4;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,23 +35,29 @@ class PeanutBoxTest {
     void getPeanut() {
         PeanutBox.INSTANCE.init("nextstep.context.test_case_1");
         assertAll(
-                () -> assertPeanut(TC1_Layer_1_1.class),
-                () -> assertPeanut(TC1_Layer_1_2.class),
-                () -> assertPeanut(TC1_Layer_1_3.class),
-                () -> assertPeanut(TC1_Layer_2_1.class),
-                () -> assertPeanut(TC1_Layer_2_2.class),
-                () -> assertPeanut(TC1_Layer_2_3.class),
-                () -> assertPeanut(TC1_Layer_3_1.class)
+                () -> assert_peanut_contains(TC1_Layer_1_1.class),
+                () -> assert_peanut_contains(TC1_Layer_1_2.class),
+                () -> assert_peanut_contains(TC1_Layer_1_3.class),
+                () -> assert_peanut_contains(TC1_Layer_2_1.class),
+                () -> assert_peanut_contains(TC1_Layer_2_2.class),
+                () -> assert_peanut_contains(TC1_Layer_2_3.class),
+                () -> assert_peanut_contains(TC1_Layer_3_1.class)
         );
     }
 
     @Test
     void getPeanut_2() {
         PeanutBox.INSTANCE.init("nextstep.context.test_case_2");
+
+        final UserController userController = PeanutBox.INSTANCE.getPeanut(UserController.class);
+
         assertAll(
-                () -> assertPeanut(UserService.class),
-                () -> assertPeanut(InMemoryUserRepository.class),
-                () -> assertPeanut(UserController.class)
+                () -> assert_peanut_contains(UserService.class),
+                () -> assert_peanut_contains(InMemoryUserRepository.class),
+                () -> assert_peanut_contains(UserController.class),
+                () -> assert_peanut_contains(ObjectMapper.class),
+                () -> assertThat(userController.getUserService()).isExactlyInstanceOf(UserService.class),
+                () -> assertThat(userController.getObjectMapper()).isExactlyInstanceOf(ObjectMapper.class)
         );
     }
 
@@ -56,15 +65,18 @@ class PeanutBoxTest {
     void getPeanut_3() {
         PeanutBox.INSTANCE.init("nextstep.context.test_case_3");
         assertAll(
-                () -> assertPeanut(TC3_Layer_1.class),
-                () -> assertPeanut(TC3_Layer_2_1.class),
-                () -> assertPeanut(TC3_Layer_2_2.class),
-                () -> assertPeanut(TC3_Layer_3_1.class),
-                () -> assertPeanut(TC3_Layer_3_2.class)
+                () -> assert_peanut_contains(TC3_Layer_1.class),
+                () -> assert_peanut_contains(TC3_Layer_2_1.class),
+                () -> assert_peanut_contains(TC3_Layer_2_2.class),
+                () -> assert_peanut_contains(TC3_Layer_3_1.class),
+                () -> assert_peanut_contains(TC3_Layer_3_2.class),
+                () -> assert_peanut_contains(TC3_Layer_3_3.class),
+                () -> assert_peanut_contains(TC3_Layer_4.class)
         );
     }
 
-    private void assertPeanut(final Class<?> clazz) {
+    private void assert_peanut_contains(final Class<?> clazz) {
+
         assertThat(PeanutBox.INSTANCE.getPeanut(clazz)).isInstanceOf(clazz);
     }
 }

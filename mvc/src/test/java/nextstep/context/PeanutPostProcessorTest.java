@@ -1,6 +1,6 @@
 package nextstep.context;
 
-import nextstep.context.post_process_test_case.TestTargetService;
+import nextstep.context.test_case_4_tx.TestTargetService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
