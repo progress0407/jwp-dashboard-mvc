@@ -22,7 +22,6 @@ public enum PeanutBox {
     INSTANCE;
 
     private static final Logger log = LoggerFactory.getLogger(PeanutBox.class);
-
     private final Set<Object> peanutsCache = new HashSet<>();
     private Reflections reflections;
 
@@ -126,7 +125,7 @@ public enum PeanutBox {
             return newInstance;
         }
 
-        /** 여러 args인 경우 */
+        /** 여러 인자의 생성자를 갖는 경우 */
         else {
             final Constructor<?>[] constructors = type.getDeclaredConstructors();
             validateConstructorIsUnique(constructors);
@@ -219,9 +218,9 @@ public enum PeanutBox {
         return existPublicDefaultConstructor(type) && !existFieldAnnotation(type);
     }
 
-    private Constructor<?> getDefaultConstructor(final Class<?> peanut) {
+    private Constructor<?> getDefaultConstructor(final Class<?> peanutType) {
         try {
-            return peanut.getConstructor();
+            return peanutType.getConstructor();
         } catch (NoSuchMethodException e) {
             return null; // 메서드가 존재하지 않는 경우를 허용해야 함!
         } catch (SecurityException e) {

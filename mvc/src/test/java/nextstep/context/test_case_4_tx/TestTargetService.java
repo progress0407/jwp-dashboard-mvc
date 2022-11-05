@@ -1,4 +1,4 @@
-package nextstep.context.post_process_test_case;
+package nextstep.context.test_case_4_tx;
 
 import nextstep.web.annotation.Service;
 import nextstep.web.annotation.Toransactional;
