@@ -2,7 +2,7 @@ package nextstep.mvc.controller.tobe;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import nextstep.context.PeanutBox;
+import nextstep.context.box.PeanutBox;
 import nextstep.mvc.handler.mapper.AnnotationHandlerMapper;
 import nextstep.mvc.handler.tobe.HandlerExecution;
 import org.junit.jupiter.api.BeforeEach;

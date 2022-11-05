@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import jakarta.servlet.http.HttpServletRequest;
-import nextstep.context.PeanutBox;
+import nextstep.context.box.PeanutBox;
 import nextstep.mvc.handler.mapper.AnnotationHandlerMapper;
 import nextstep.mvc.handler.tobe.HandlerExecution;
 import nextstep.mvc.handler.mapper.HandlerMappingRegistry;

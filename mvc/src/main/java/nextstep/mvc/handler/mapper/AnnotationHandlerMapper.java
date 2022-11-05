@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import nextstep.context.PeanutBox;
+import nextstep.context.box.PeanutBox;
 import nextstep.mvc.handler.tobe.HandlerExecution;
 import nextstep.mvc.handler.tobe.HandlerKey;
 import nextstep.web.annotation.Controller;

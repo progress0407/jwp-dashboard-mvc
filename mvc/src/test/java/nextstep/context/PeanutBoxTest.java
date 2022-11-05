@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nextstep.context.box.PeanutBox;
 import nextstep.context.test_case_1.TC1_Layer_1_1;
 import nextstep.context.test_case_1.TC1_Layer_1_2;
 import nextstep.context.test_case_1.TC1_Layer_1_3;

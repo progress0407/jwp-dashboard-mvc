@@ -1,4 +1,4 @@
-package nextstep.context;
+package nextstep.context.scanner;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
@@ -17,15 +17,15 @@ public class ManualPeanutScanner implements PeanutScanner {
     private ManualPeanutScanner() {
     }
 
-    public static final ManualPeanutScanner SINGLETON_INSTANCE = new ManualPeanutScanner();
+    private static final ManualPeanutScanner SINGLETON_INSTANCE = new ManualPeanutScanner();
 
-    public static final ManualPeanutScanner instance() {
+    public static ManualPeanutScanner instance() {
 
         return SINGLETON_INSTANCE;
     }
 
     @Override
-    public Set<Object> scan(final Reflections reflections, Set<Object> unmodifiablePeanuts) {
+    public Set<Object> scan(Reflections reflections, Set<Object> unmodifiablePeanuts) {
 
         try {
             return scanInternal(reflections);
@@ -34,31 +34,32 @@ public class ManualPeanutScanner implements PeanutScanner {
         }
     }
 
-    private Set<Object> scanInternal(final Reflections reflections) throws Exception {
+    private Set<Object> scanInternal(Reflections reflections) throws Exception {
 
         Set<Object> peanuts = new HashSet<>();
 
         Set<Class<?>> peanutConfigClasses = reflections.getTypesAnnotatedWith(PeanutConfiguration.class);
 
         for (Class<?> peanutConfigClass : peanutConfigClasses) {
-            List<Object> peanutObjects = constructPeanutsFromConfig(peanutConfigClass);
+            List<Object> peanutObjects = createPeanutsFromConfig(peanutConfigClass);
             peanuts.addAll(peanutObjects);
         }
 
         return peanuts;
     }
 
-    private List<Object> constructPeanutsFromConfig(Class<?> peanutConfigClass) throws Exception {
+    private List<Object> createPeanutsFromConfig(Class<?> peanutConfigClass) throws Exception {
 
-        final Object peanutConfigObject = peanutConfigClass.getConstructor().newInstance();
+        Object peanutConfigObject = peanutConfigClass.getConstructor().newInstance();
 
         return stream(peanutConfigClass.getDeclaredMethods())
                 .filter(peanutMethod -> peanutMethod.isAnnotationPresent(ThisIsPeanut.class))
-                .map(peanutMethod -> constructPeanut(peanutConfigObject, peanutMethod))
+                .map(peanutMethod -> createPeanut(peanutConfigObject, peanutMethod))
                 .collect(toList());
     }
 
-    private Object constructPeanut(Object peanutConfigObject, Method peanutMethod) {
+    private Object createPeanut(Object peanutConfigObject, Method peanutMethod) {
+
         try {
             return peanutMethod.invoke(peanutConfigObject);
         } catch (IllegalAccessException | InvocationTargetException e) {

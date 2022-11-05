@@ -1,5 +1,7 @@
 package nextstep.context;
 
+import nextstep.context.box.PeanutBox;
+import nextstep.context.box.PeanutPostProcessor;
 import nextstep.context.test_case_4_tx.TestTargetService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

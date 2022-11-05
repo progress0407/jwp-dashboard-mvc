@@ -7,7 +7,7 @@ import com.techcourse.controller.v1.RegisterOldController;
 import com.techcourse.controller.v1.RegisterViewOldController;
 import com.techcourse.repository.InMemoryUserRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import nextstep.context.PeanutBox;
+import nextstep.context.box.PeanutBox;
 import nextstep.mvc.handler.mapper.HandlerMapper;
 import nextstep.mvc.handler.asis.Controller;
 import nextstep.mvc.handler.asis.ForwardController;

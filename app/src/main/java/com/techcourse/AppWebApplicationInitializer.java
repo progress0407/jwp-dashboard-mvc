@@ -2,7 +2,7 @@ package com.techcourse;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletRegistration.Dynamic;
-import nextstep.context.PeanutBox;
+import nextstep.context.box.PeanutBox;
 import nextstep.mvc.handler.adapter.AnnotationHandlerAdapter;
 import nextstep.mvc.handler.adapter.ManualHandlerAdapter;
 import nextstep.mvc.handler.mapper.AnnotationHandlerMapper;

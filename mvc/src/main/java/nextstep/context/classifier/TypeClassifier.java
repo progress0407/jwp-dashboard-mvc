@@ -1,4 +1,4 @@
-package nextstep.context;
+package nextstep.context.classifier;
 
 public interface TypeClassifier {
 }
