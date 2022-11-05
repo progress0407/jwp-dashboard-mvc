@@ -19,6 +19,7 @@ import nextstep.context.test_case_3.TC3_Layer_2_1;
 import nextstep.context.test_case_3.TC3_Layer_2_2;
 import nextstep.context.test_case_3.TC3_Layer_3_1;
 import nextstep.context.test_case_3.TC3_Layer_3_2;
+import nextstep.context.test_case_3.TC3_Layer_3_3;
 import nextstep.context.test_case_3.TC3_Layer_4;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -69,6 +70,7 @@ class PeanutBoxTest {
                 () -> assert_peanut_contains(TC3_Layer_2_2.class),
                 () -> assert_peanut_contains(TC3_Layer_3_1.class),
                 () -> assert_peanut_contains(TC3_Layer_3_2.class),
+                () -> assert_peanut_contains(TC3_Layer_3_3.class),
                 () -> assert_peanut_contains(TC3_Layer_4.class)
         );
     }
