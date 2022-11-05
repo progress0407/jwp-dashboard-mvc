@@ -26,6 +26,8 @@ public enum PeanutBox {
     INSTANCE;
 
     private static final Logger log = LoggerFactory.getLogger(PeanutBox.class);
+    private static final PeanutManualScanner peanutManualScanner = PeanutManualScanner.instance();
+
     private final Set<Object> peanuts = new HashSet<>();
     private Reflections reflections;
 
@@ -61,35 +63,9 @@ public enum PeanutBox {
 
     private void initInternal(final String path) throws Exception {
         reflections = new Reflections(path);
-        scanManualPeanuts(reflections);
+        Set<Object> manualPeanuts = peanutManualScanner.scan(reflections);
+        peanuts.addAll(manualPeanuts);
         scanAutoPeanuts(reflections);
-    }
-
-    private void scanManualPeanuts(final Reflections reflections) throws Exception {
-        final Set<Class<?>> peanutConfigClasses = reflections.getTypesAnnotatedWith(PeanutConfiguration.class);
-
-        for (Class<?> peanutConfigClass : peanutConfigClasses) {
-            List<Object> peanuts = constructPeanutsFromConfig(peanutConfigClass);
-            this.peanuts.addAll(peanuts);
-        }
-    }
-
-    private List<Object> constructPeanutsFromConfig(Class<?> peanutConfigClass) throws Exception{
-
-        final Object peanutConfigObject = peanutConfigClass.getConstructor().newInstance();
-
-        return stream(peanutConfigClass.getDeclaredMethods())
-                .filter(peanutMethod -> peanutMethod.isAnnotationPresent(ThisIsPeanut.class))
-                .map(peanutMethod -> constructPeanut(peanutConfigObject, peanutMethod))
-                .collect(toList());
-    }
-
-    private Object constructPeanut(Object peanutConfigObject, Method peanutMethod) {
-        try {
-            return peanutMethod.invoke(peanutConfigObject);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void scanAutoPeanuts(final Reflections reflections) throws Exception {
