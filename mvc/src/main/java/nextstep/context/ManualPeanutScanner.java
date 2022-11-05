@@ -12,19 +12,20 @@ import nextstep.web.annotation.PeanutConfiguration;
 import nextstep.web.annotation.ThisIsPeanut;
 import org.reflections.Reflections;
 
-public class PeanutManualScanner implements PeanutScanner {
+public class ManualPeanutScanner implements PeanutScanner {
 
-    private PeanutManualScanner() {
+    private ManualPeanutScanner() {
     }
 
-    public static final PeanutManualScanner SINGLETON_INSTANCE = new PeanutManualScanner();
+    public static final ManualPeanutScanner SINGLETON_INSTANCE = new ManualPeanutScanner();
 
-    public static final PeanutManualScanner instance() {
+    public static final ManualPeanutScanner instance() {
 
         return SINGLETON_INSTANCE;
     }
 
-    public Set<Object> scan(final Reflections reflections) {
+    @Override
+    public Set<Object> scan(final Reflections reflections, Set<Object> unmodifiablePeanuts) {
 
         try {
             return scanInternal(reflections);

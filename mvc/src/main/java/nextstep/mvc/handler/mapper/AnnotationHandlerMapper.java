@@ -39,7 +39,7 @@ public class AnnotationHandlerMapper implements HandlerMapper {
         final Map<HandlerKey, HandlerExecution> handlerExecutions = new Reflections(basePackages)
                 .getTypesAnnotatedWith(Controller.class)
                 .stream()
-                .map(PeanutBox.INSTANCE::getPeanut)
+                .map(PeanutBox.INSTANCE::findPeanut)
                 .flatMap(this::createHandlerExecutions)
                 .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 

@@ -25,7 +25,7 @@ public class ManualHandlerMapper implements HandlerMapper {
 
     @Override
     public void initialize() {
-        final InMemoryUserRepository userRepository = PeanutBox.INSTANCE.getPeanut(InMemoryUserRepository.class);
+        final InMemoryUserRepository userRepository = PeanutBox.INSTANCE.findPeanut(InMemoryUserRepository.class);
 
         controllers.put("/", new ForwardController("/index.jsp"));
         controllers.put("/old/login", new LoginOldController(userRepository));

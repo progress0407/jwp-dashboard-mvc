@@ -49,7 +49,7 @@ class PeanutBoxTest {
     void getPeanut_2() {
         PeanutBox.INSTANCE.init("nextstep.context.test_case_2");
 
-        final UserController userController = PeanutBox.INSTANCE.getPeanut(UserController.class);
+        final UserController userController = PeanutBox.INSTANCE.findPeanut(UserController.class);
 
         assertAll(
                 () -> assert_peanut_contains(UserService.class),
@@ -77,6 +77,6 @@ class PeanutBoxTest {
 
     private void assert_peanut_contains(final Class<?> clazz) {
 
-        assertThat(PeanutBox.INSTANCE.getPeanut(clazz)).isInstanceOf(clazz);
+        assertThat(PeanutBox.INSTANCE.findPeanut(clazz)).isInstanceOf(clazz);
     }
 }

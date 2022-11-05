@@ -13,7 +13,7 @@ class PeanutPostProcessorTest {
     void postProcess() {
         PeanutBox.INSTANCE.init("nextstep.context.post_process_test_case");
         PeanutPostProcessor.INSTANCE.init("nextstep.context.post_process_test_case");
-        final TestTargetService proxy = PeanutBox.INSTANCE.getPeanut(TestTargetService.class);
+        final TestTargetService proxy = PeanutBox.INSTANCE.findPeanut(TestTargetService.class);
 
         log.info("method call start !!");
         proxy.somethingDoWithTransactional();

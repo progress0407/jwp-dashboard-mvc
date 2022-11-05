@@ -34,7 +34,7 @@ public enum PeanutPostProcessor {
         for (final Class<?> original : services) {
             final List<Method> toransactionalMethods = findToransactionalMethods(original);
             if (toransactionalMethods.size() > 0) {
-                final Object target = PeanutBox.INSTANCE.getPeanut(original);
+                final Object target = PeanutBox.INSTANCE.findPeanut(original);
                 final Object proxy = createProxy(target);
                 PeanutBox.INSTANCE.changePeanut(original, proxy);
             }
