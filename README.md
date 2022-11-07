@@ -1,5 +1,7 @@
 # @MVC 프레임워크 구현
 
+### [Peanut Box 구현](docs/PEANUT.md)
+
 # 미션 요구사항
 
 # 1단계
